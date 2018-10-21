@@ -3,7 +3,7 @@ require 'active_support/inflector'
 
 class InteractiveRecord
   def self.table_name
-    "#{self.to_s.downcase}s"
+    self.to_s.downcase.pluralize
   end
 
   def self.column_names
@@ -54,7 +54,6 @@ class InteractiveRecord
     sql = "SELECT * FROM #{self.table_name} WHERE name = '#{name}'"
     DB[:conn].execute(sql)
   end
-
 
   def self.find_by(hash)
     value = hash.values.first
